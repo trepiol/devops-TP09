@@ -1,0 +1,3 @@
+HTTP / -> 200
+HTTP /health -> {"db":"connected","status":"ok","time":"2026-05-23T02:26:20.422512"}
+

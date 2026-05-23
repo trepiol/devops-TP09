@@ -1,0 +1,24 @@
+NAME                            READY   STATUS    RESTARTS   AGE    IP            NODE                NOMINATED NODE   READINESS GATES
+pod/backend-785b774cff-5bh2n    1/1     Running   0          86s    10.244.0.8    tp9-control-plane   <none>           <none>
+pod/backend-785b774cff-hbxrs    1/1     Running   0          86s    10.244.0.7    tp9-control-plane   <none>           <none>
+pod/frontend-5464c66c7d-8lz9k   1/1     Running   0          54s    10.244.0.9    tp9-control-plane   <none>           <none>
+pod/frontend-5464c66c7d-rnm8f   1/1     Running   0          54s    10.244.0.10   tp9-control-plane   <none>           <none>
+pod/postgres-6f6fb9b7c6-gkk8n   1/1     Running   0          108s   10.244.0.6    tp9-control-plane   <none>           <none>
+
+NAME                       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE    SELECTOR
+service/backend-service    ClusterIP   10.96.172.176   <none>        5000/TCP       86s    app=backend
+service/frontend-service   NodePort    10.96.61.48     <none>        80:30080/TCP   54s    app=frontend
+service/postgres-service   ClusterIP   10.96.220.30    <none>        5432/TCP       108s   app=postgres
+
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE    CONTAINERS   IMAGES                            SELECTOR
+deployment.apps/backend    2/2     2            2           86s    backend      tr3piol/devops-portfolio:latest   app=backend
+deployment.apps/frontend   2/2     2            2           54s    frontend     nginx:alpine                      app=frontend
+deployment.apps/postgres   1/1     1            1           108s   postgres     postgres:16-alpine                app=postgres
+
+NAME                                  DESIRED   CURRENT   READY   AGE    CONTAINERS   IMAGES                            SELECTOR
+replicaset.apps/backend-785b774cff    2         2         2       86s    backend      tr3piol/devops-portfolio:latest   app=backend,pod-template-hash=785b774cff
+replicaset.apps/frontend-5464c66c7d   2         2         2       54s    frontend     nginx:alpine                      app=frontend,pod-template-hash=5464c66c7d
+replicaset.apps/postgres-6f6fb9b7c6   1         1         1       108s   postgres     postgres:16-alpine                app=postgres,pod-template-hash=6f6fb9b7c6
+
+NAME                                 STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE    VOLUMEMODE
+persistentvolumeclaim/postgres-pvc   Bound    pvc-4b11e7fb-ba4d-42e8-8b4e-a050f8b2eb03   1Gi        RWO            standard       <unset>                 108s   Filesystem

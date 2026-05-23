@@ -1,0 +1,32 @@
+=== Verificacion Kubernetes - TP09 ===
+
+--- Nodos ---
+  [OK]   Nodo tp9-control-plane Ready
+
+--- Pods ---
+  [OK]   backend-785b774cff-5bh2n Running (1/1)
+  [OK]   backend-785b774cff-hbxrs Running (1/1)
+  [OK]   frontend-5464c66c7d-8lz9k Running (1/1)
+  [OK]   frontend-5464c66c7d-rnm8f Running (1/1)
+  [OK]   postgres-6f6fb9b7c6-gkk8n Running (1/1)
+
+--- Deployments ---
+  [OK]   backend 2/2 replicas
+  [OK]   frontend 2/2 replicas
+  [OK]   postgres 1/1 replicas
+
+--- Services ---
+  [OK]   backend-service ClusterIP 5000/TCP
+  [OK]   frontend-service NodePort 80:30080/TCP
+  [OK]   postgres-service ClusterIP 5432/TCP
+
+--- PVC ---
+  [OK]   postgres-pvc Bound (1Gi)
+
+--- Healthcheck interno ---
+  [OK]   frontend-service/health respondio
+{"db":"connected","status":"ok","time":"2026-05-23T02:26:08.778783"}
+pod "tp09-curl" deleted from devops-portfolio namespace
+
+
+Cluster OK - todos los checks pasaron
